@@ -134,6 +134,8 @@ function kw_manifests_run($info) {
     return FALSE;
   }
 
+  module_load_include($info['module'], 'install');
+
   if (isset($info['file'])) {
     $path = isset($info['path']) ? $info['path'] : drupal_get_path('module', $info['module']);
     $filepath = $path . DIRECTORY_SEPARATOR . $info['file'];
