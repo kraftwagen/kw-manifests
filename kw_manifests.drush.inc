@@ -11,7 +11,7 @@ function kw_manifests_drush_command() {
   return $items;
 }
 
-function drush_kraftwagen_manifests() {
+function drush_kw_manifests() {
   $manifests = kw_manifests_info();
   if (empty($manifests)) {
     drush_log(dt('No Kraftwagen manifests found.'), 'ok');
@@ -19,8 +19,8 @@ function drush_kraftwagen_manifests() {
   }
 
   foreach ($manifests as $id => $manifest) {
-    $id = kraftwagen_manifest_manifest_id($manifest);
     drush_log(dt('Applying manifest %name for %module', array('%name' => $manifest['name'], '%module' => $manifest['module'])));
+    $id = kw_manifests_manifest_id($manifest);
 
     $result = kw_manifests_run($manifest);
     if (!$result) {
