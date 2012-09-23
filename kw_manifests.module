@@ -121,10 +121,10 @@ function kw_manifests_info() {
 function kw_manifests_run($info) {
   if (empty($info['applicable'])) {
     if (!empty($info['missing'])) {
-      drupal_set_message(t("Manifest %name of %module is not applicable. In this case, the manifest was a stub manifest that is created to mark missing dependencies of other manifests.", array('%name' => $info['name'], '%module' => $info['module'])), 'error');
+      drupal_set_message(t("Manifest %name of %module is not applicable. It was marked as dependency for %dependants, but does not exist.", array('%name' => $info['name'], '%module' => $info['module'], '%dependants' => implode(', ', array_map('kw_manifests_manifest_id', $info['paths'])))), 'error');
       return FALSE;
     } elseif (!empty($info['missing dependencies'])) {
-      drupal_set_message(t("Manifest %name of %module is not applicable, because it has unresolved dependencies: %deps", array('%name' => $info['name'], '%module' => $info['module'], '%deps' => implode(', ', $info['missing dependencies'])), 'error');
+      drupal_set_message(t("Manifest %name of %module is not applicable, because it has unresolved dependencies: %deps", array('%name' => $info['name'], '%module' => $info['module'], '%deps' => implode(', ', array_map('kw_manifests_manifest_id', $info['missing dependencies'])))), 'error');
       return FALSE;
     } else {
       drupal_set_message(t("Manifest %name of %module is not applicable", array('%name' => $info['name'], '%module' => $info['module'])), 'error');
