@@ -19,16 +19,15 @@ function drush_kw_manifests() {
   }
 
   foreach ($manifests as $id => $manifest) {
-    drush_log(dt('Applying manifest %name for %module', array('%name' => $manifest['name'], '%module' => $manifest['module'])));
     $id = kw_manifests_manifest_id($manifest);
+    drush_log(dt('Applying manifest !name for !module', array('!name' => $manifest['name'], '!module' => $manifest['module'])));
 
     $result = kw_manifests_run($manifest);
     if (!$result) {
-      drush_log(dt('Could not apply manifest %name for %module.', array('%name' => $manifest['name'], '%module' => $manifest['module'])), 'error');
-      exit;
+      return drush_set_error(dt('Could not apply manifest !name for !module.', array('!name' => $manifest['name'], '!module' => $manifest['module'])));
     }
 
-    drush_log(dt('Manifest %name for %module ran successfully.', array('%name' => $manifest['name'], '%module' => $manifest['module'])), 'ok');
+    drush_log(dt('Manifest !name for !module ran successfully.', array('!name' => $manifest['name'], '!module' => $manifest['module'])), 'ok');
   }
 
   drush_log(dt('Finished running manifests.'), 'ok');
