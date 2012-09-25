@@ -30,6 +30,9 @@
  *   - "file path": (optional) The path to the directory containing the file 
  *     specified in "file". This defaults to the path to the module implementing
  *     the hook.
+ *   - "dependencies": (optional) Array of manifests that should be executed 
+ *     for the registered manifest. Every manifest is an associative array, 
+ *     containing a "module" and a "name" key.
  */
 function hook_kw_manifests_info() {
   $manifests = array();
@@ -37,6 +40,10 @@ function hook_kw_manifests_info() {
   $manifests['my_manifest'] = array(
     'callback' => 'mymodule_manifest_my_manifest',
     'file' => 'mymodule.manifests.inc',
+    'dependencies' => array(
+      array('module' => 'othermodule', 'name' => 'their_manifest'),
+      array('module' => 'othermodule2', 'name' => 'other_manifest'),
+    ),
   );
 
   return $manifests;
