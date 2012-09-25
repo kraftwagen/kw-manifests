@@ -1,9 +1,9 @@
 # Krafwagen Manifests
 
-Kraftwagen Manifests is a Drupal that provides the means to register and execute
-idempotent migrations. Usually migrations are intented to be only ran once (
-Drupal already provides this with `hook_update_N`), but in quite a lot of cases
-this isn't very usefull. 
+Kraftwagen Manifests is a Drupal module that provides the means to register and
+execute idempotent migrations. Usually migrations are intented to be only ran
+once (Drupal already provides this with `hook_update_N`), but in quite a lot of
+cases this isn't very usefull.
 
 ## Usage
 
