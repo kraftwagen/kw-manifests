@@ -20,8 +20,8 @@
  *   * `callback` is the function that needs to be called to run the manifest.
  *   * `file` is optionally the file that should be included before running the
  *     manifest.
- *   * `path` is optionally the path where the file should be loaded from. If
- *      not given drupal_get_path('module', $module) is assumed.
+ *   * `file path` is optionally the path where the file should be loaded from.
+ *      If not given drupal_get_path('module', $module) is assumed.
  *   * `dependencies` is an optional array of dependencies. Each value is an
  *     associative array with a `module` and `name` pair.
  *   * `missing` if given and TRUE means that this manifest does not really 
@@ -137,7 +137,7 @@ function kw_manifests_run($info) {
   module_load_include($info['module'], 'install');
 
   if (isset($info['file'])) {
-    $path = isset($info['path']) ? $info['path'] : drupal_get_path('module', $info['module']);
+    $path = isset($info['file path']) ? $info['file path'] : drupal_get_path('module', $info['module']);
     $filepath = $path . DIRECTORY_SEPARATOR . $info['file'];
     if (is_file($filepath)) {
       require_once $filepath;
