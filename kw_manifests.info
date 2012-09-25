@@ -1,4 +1,4 @@
 name = Kraftwagen Manifests
-description = Allows running predefined sets of functions sequentially, intended to update the database to a desired state, like omnipotent migrations.
+description = Allows running predefined sets of functions sequentially, intended to update the database to a desired state, like idempotent migrations.
 
 core = 7.x
