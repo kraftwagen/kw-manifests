@@ -155,9 +155,16 @@ function kw_manifests_run($info) {
     return FALSE;
   }
 
-  $callback = $info['callback'];
-  $result = $callback();
+  $args = array();
+  if (isset($info['callback arguments'])) {
+    if (!is_array($info['callback arguments'])) {
+      drupal_set_message(t("Callback arguments for manifest %name of %module is not an array", array('%name' => $info['name'], '%module' => $info['module'])), 'error');
+      return FALSE;
+    }
+    $args = $info['callback arguments'];
+  }
 
+  $result = call_user_func_array($info['callback'], $args);
   return isset($result) ? $result : TRUE;
 }
 
