@@ -27,8 +27,9 @@
  *     executed; this allows manifest callback functions to be in separate 
  *     files. The file should be relative to the implementing module's directory
  *     unless otherwise specified by the "file path" option.
- *   - "file path": The path to the directory containing the file specified in
- *     "file". This defaults to the path to the module implementing the hook.
+ *   - "file path": (optional) The path to the directory containing the file 
+ *     specified in "file". This defaults to the path to the module implementing
+ *     the hook.
  */
 function hook_kw_manifests_info() {
   $manifests = array();
