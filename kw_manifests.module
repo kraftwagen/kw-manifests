@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Provide the code to collect and execute manifests.
+ */
+
+/**
  * Load the information about all available manifests.
  *
  * This function is very resource intensive the first time it is called. It 
@@ -118,6 +122,19 @@ function kw_manifests_info() {
   return $manifest_info;
 }
 
+/**
+ * Run a manifest.
+ *
+ * Check for unresolved dependencies for a manifest, load the required files and
+ * try to execute the callback. 
+ *
+ * @param $info
+ *   The manifest info array, as returned from kw_manifests_info().
+ *
+ * @return
+ *   FALSE or something that casts to FALSE in case of errors. In case of 
+ *   success TRUE or something that casts to TRUE.
+ */
 function kw_manifests_run($info) {
   if (empty($info['applicable'])) {
     if (!empty($info['missing'])) {
