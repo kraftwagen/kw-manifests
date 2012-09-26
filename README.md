@@ -11,25 +11,25 @@ An idempotent migration is called a manifest in Kraftwagen Manifests. You can
 register a manifest by implementing `hook_kw_manifests_info` in your module's
 `.install` file.
 
-    <?php
+```php
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function mymodule_kw_manifests_info() {
+  $manifests = array();
 
-    /**
-     * Implements hook_kw_manifests_info().
-     */
-    function mymodule_kw_manifests_info() {
-      $manifests = array();
+  $manifests['my_manifest'] = array(
+    'callback' => 'mymodule_manifest_my_manifest',
+  );
 
-      $manifests['my_manifest'] = array(
-        'callback' => 'mymodule_manifest_my_manifest',
-      );
+  return $manifests;
+}
 
-      return $manifests;
-    }
-
-    function mymodule_manifest_my_manifest() {
-      // some very trivial example
-      variable_set('some_variable', 'desired value');
-    }
+function mymodule_manifest_my_manifest() {
+  // some very trivial example
+  variable_set('some_variable', 'desired value');
+}
+```
 
 Take a look at `kw_manifests.api.php` for more information about registering 
 manifests. The registration makes it for example possible to mark other 
