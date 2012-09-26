@@ -32,7 +32,15 @@ register a manifest by implementing `hook_kw_manifests_info` in your module's
     }
 
 Take a look at `kw_manifests.api.php` for more information about registering 
-manifests.
+manifests. The registration makes it for example possible to mark other 
+manifests as a dependency, to make sure another manifest is executed before 
+yours.
+
+You can execute all the manifests that are registered in enabled modules by 
+running the following command (requires [Drush](http://drupal.org/project/drush)
+to be installed).
+
+    drush kw-manifests
 
 ## Things to note
 
