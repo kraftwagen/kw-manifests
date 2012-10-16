@@ -1,4 +1,4 @@
-# Krafwagen Manifests
+# Kraftwagen Manifests
 
 Kraftwagen Manifests is a Drupal module that provides the means to register and
 execute idempotent migrations. Usually migrations are intented to be only ran
