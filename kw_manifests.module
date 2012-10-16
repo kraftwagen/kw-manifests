@@ -117,6 +117,8 @@ function kw_manifests_info() {
         $info['missing dependencies'] = array();
       }
     }
+
+    drupal_alter(__FUNCTION__, $manifest_info);
   }
 
   return $manifest_info;
