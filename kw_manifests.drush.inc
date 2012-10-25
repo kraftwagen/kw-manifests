@@ -9,6 +9,7 @@ function kw_manifests_drush_command() {
   $items['kw-manifests'] = array(
     'description' => 'Run all the manifests that are defined in this installation.',
     'aliases' => array('kw-m'),
+    'drupal dependencies' => array('kw_manifests'),
   );
 
   return $items;
