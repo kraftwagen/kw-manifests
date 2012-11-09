@@ -18,7 +18,16 @@ function kw_manifests_drush_command() {
 /**
  * Implements drush_COMMAND() for kw-manifests.
  */
-function drush_kw_manifests() {
+function drush_kw_manifests($environment = null) {
+  // if no explicit enviroment is given, default to production but let the 
+  // kw_environment module override this.
+  if (!isset($environment)) {
+    $environment = 'production';
+    if (function_exists('kw_environment')) {
+      $environment = kw_environment();
+    }
+  }
+
   // load all defined manifests in executable order
   $manifests = kw_manifests_info();
   if (empty($manifests)) {
@@ -28,7 +37,27 @@ function drush_kw_manifests() {
 
   // execute all manifests
   foreach ($manifests as $id => $manifest) {
-    $id = kw_manifests_manifest_id($manifest);
+    // do not execute manifests that require an environment that is not the 
+    // current
+    if (!empty($manifest['require environment'])) {
+      if (!is_array($manifest['require environment'])) {
+        $manifest['require environment'] = array($manifest['require environment']);
+      }
+      if (!in_array($environment, $manifest['require environment'])) {
+        continue;
+      }
+    }
+
+    // do not execute manifests that exclude the current environment
+    if (!empty($manifest['exclude environment'])) {
+      if (!is_array($manifest['exclude environment'])) {
+        $manifest['exclude environment'] = array($manifest['exclude environment']);
+      }
+      if (in_array($environment, $manifest['exclude environment'])) {
+        continue;
+      }
+    }
+
     drush_log(dt('Applying manifest !name for !module', array('!name' => $manifest['name'], '!module' => $manifest['module'])));
 
     // run manifest
