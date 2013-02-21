@@ -33,6 +33,13 @@
  *   - "dependencies": (optional) Array of manifests that should be executed 
  *     for the registered manifest. Every manifest is an associative array, 
  *     containing a "module" and a "name" key.
+ *   - "require environment": (optional) Array of environments in which the 
+ *     manifest should be executed. In all other environments, it should not be
+ *     executed. Can be a string, which will be interpreted as an array with the
+ *     string as its single item.
+ *   - "exclude environment": (optional) Array of environments in which the
+ *     manifest should not be executed. In all other environments, it should be
+ *     executed. Can be a string, like "require environment".
  */
 function hook_kw_manifests_info() {
   $manifests = array();
@@ -44,6 +51,7 @@ function hook_kw_manifests_info() {
       array('module' => 'othermodule', 'name' => 'their_manifest'),
       array('module' => 'othermodule2', 'name' => 'other_manifest'),
     ),
+    'require environment' => array('development')
   );
 
   return $manifests;
